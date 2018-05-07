@@ -1,0 +1,475 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="vis.js"></script>
+    <link href="vis.css" rel="stylesheet" type="text/css" />
+
+
+    <title></title>
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 80px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: rgb(32,32,32);
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 32px;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        body {
+            background-color: black;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+        }
+
+        div#nav {
+            background-color: #6E2C00;
+            width: 100%;
+            height: 15%;
+            padding-top: 10px;
+        }
+
+        #mynetwork {
+            width: 100%;
+            height: 400px;
+            border: 1px solid black;
+        }
+
+
+        a:link {
+            color: white;
+        }
+
+        ul#nav_list li {
+            display: inline;
+            padding-left: 3%;
+            padding-right: 4%;
+            color: white;
+            font-style: italic;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        li#heading {
+            font-size: 40px;
+            font-family: "Times New Roman", Times, serif;
+            font-style: oblique;
+            color: goldenrod;
+        }
+
+
+
+
+
+
+        /*********************************************************************/
+
+        #box {
+            height: 300px;
+            width: 100%;
+            position: relative;
+            background-color: rgb(80,80,80);
+        }
+
+        #left {
+            float: left;
+            width: 49.5%;
+            height: 100%;
+            background-color: rgb(32,32,32);
+            position: absolute;
+            left: 0;
+        }
+
+
+
+        #right {
+            float: right;
+            width: 49.5%;
+            height: 100%;
+            background-color: rgb(32,32,32);
+            position: absolute;
+            right: 0;
+        }
+
+
+        .forname {
+            font-size: 25px;
+            color: white;
+            font-family: 'Lucida Calligraphy';
+            /* position: relative;
+            display: inline-block;*/
+        }
+
+        .fortable {
+            margin-left: 23%;
+            margin-top: 10%;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            height: 34px;
+            margin-top: 5%;
+            margin-left: 10%;
+        }
+
+            .switch input {
+                display: none;
+            }
+
+        .slider_round {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ca2222;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+            .slider_round:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+                border-radius: 50%;
+            }
+
+        input:checked + .slider_round {
+            background-color: #2ab934;
+        }
+
+        input:focus + .slider_round {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider_round:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(55px);
+        }
+
+
+        .slider_round:after {
+            content: 'OFF';
+            color: white;
+            display: block;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            font-size: 10px;
+            font-family: Verdana, sans-serif;
+        }
+
+        input:checked + .slider_round:after {
+            content: 'ON';
+        }
+    </style>
+</head>
+<body onload="loadXMLDoc()">
+    <div id="nav">
+        <ul id="nav_list">
+            <li id="heading"><b>Blue Mesh</b></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <li><a href="#" target="_parent"><b>DISCOVER</b></a></li>
+            <li><a href="#" target="_parent"><b>DASHBOARD</b></a></li>
+            <li><a href="#" target="_parent"><b>LIGHTS</b></a></li>
+            <li><a href="#" target="_parent"><b>SETTINGS</b></a></li>
+        </ul>
+
+    </div>
+
+    <div id="label_name">
+
+    </div>
+    <div id="label_name1">
+
+    </div>
+    <div id="mynetwork">
+
+    </div>
+
+
+
+
+    <script type="text/javascript">
+
+        /*var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            //if (this.readyState == 4 && this.status == 200) {
+                myFunction(this);
+            //}
+        };
+        xhttp.open("GET", "Table.xml", true);
+        xhttp.send();*/
+
+        function loadXMLDoc() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this);
+                }
+            };
+            xmlhttp.open("GET", "MeshDetails.xml", false);
+            xmlhttp.send();
+        }
+
+        var names = null;
+        var meshlist = null;
+
+        function myFunction(xml) {
+            var xmlDoc = xml.responseXML;
+            var x = xmlDoc.getElementsByTagName("node"); //storing node in x
+            names = [];
+            meshlist = [];
+            var a;
+            var b;
+            var size = x.length;// number of nodes
+            var edgesize=0;
+            for (var i = 0; i < size; i++) {
+                a = x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue; // stores name of device ; as it is the first child node
+                b = i + 1; // stores the id's
+
+                edgesize = x[i].getElementsByTagName("meshlist")[0].getElementsByTagName("neighbour").length;//number of edges per node(i.e getting the size of meshlist for each node)
+                console.log(edgesize);
+                names.push([b, a, edgesize]); //b is id ; a is name
+                for (var j = 0; j < edgesize; j++)
+                {
+                    console.log("j is : "+j);
+                    c = x[i].getElementsByTagName("meshlist")[0].getElementsByTagName("neighbour")[j].childNodes[0].nodeValue;//getting the meshlist
+                    var num = parseInt(c[2]);//parsing the third character d string
+                    console.log(x[i].getElementsByTagName("meshlist")[0].getElementsByTagName("neighbour")[j].childNodes[0].nodeValue + "   :   " + num);
+                    if (b < num)
+                    {
+                        meshlist.push([b, num]);
+                    }
+
+                }
+                //console.log(x[i].getElementsByTagName("meshlist")[0].getElementsByTagName("neighbour")[1].childNodes[0].nodeValue);
+
+            }
+            document.getElementById("label_name").innerHTML = names;
+            document.getElementById("label_name1").innerHTML = meshlist;
+            draw(names, size, meshlist);
+
+        }
+
+    var nodes = null;
+    var edges = null;
+    var network = null;
+
+
+    var EDGE_LENGTH_MAIN = 150;
+    var EDGE_LENGTH_SUB = 50;
+
+
+    var modal;
+    var span;
+
+
+    // Called when the Visualization API is loaded.
+    function draw(names, size, meshlist) {
+        // Create a data table with nodes.
+        nodes = [];
+
+        // Create a data table with links.
+        edges = [];
+
+        for (var i = 0; i < size; i++) {
+            nodes.push({ id: i + 1, label: names[i][1], image: 'bulb.png', shape: 'image' });
+
+        }
+        for (var j = 0; j < meshlist.length; j++) {
+            console.log(meshlist[j][0] + "  to   " + meshlist[j][1]);
+            edges.push({ from: meshlist[j][0], to: meshlist[j][1], length: EDGE_LENGTH_MAIN });//from where to where we need to have a connection
+
+        }
+        /*
+        nodes.push({ id: 1, label: names[0][1], image: 'bulb.png', shape: 'image' });
+        nodes.push({ id: 2, label: names[1][1], image: 'bulb.png', shape: 'image' });
+        nodes.push({ id: 3, label: names[2][1], image: 'bulb.png', shape: 'image' });
+        
+        edges.push({ from: 1, to: 2, length: EDGE_LENGTH_MAIN});
+        edges.push({ from: 1, to: 3, length: EDGE_LENGTH_MAIN });
+        edges.push({ from: 2, to: 3, length: EDGE_LENGTH_MAIN });
+        */
+
+
+        // create a network
+        var container = document.getElementById('mynetwork');
+        var data = {
+            nodes: nodes,
+            edges: edges,
+        };
+        var options = {
+            interaction: { hover: true },
+            //manipulation: { enabled: true },
+            edges: {
+                color: {
+                    color: 'red',
+                    highlight: '#848484',
+                    hover: '#848484',
+                },
+                nodes: {
+                    font: {
+                        color: '#848484',
+                        size: 25, // px
+                        face: 'arial',
+                    },
+                       
+                    
+                }}
+
+        };
+
+        network = new vis.Network(container, data, options);
+
+
+        modal = document.getElementById('myModal');
+        span = document.getElementsByClassName("close")[0];
+
+
+        network.on("click", function (params) {
+            params.event = "[Click light]";
+            console.log('click event,getNodeAt returns: ' + this.getNodeAt(params.pointer.DOM));
+            modal.style.display = "block";
+            bisket(network.getSelectedNodes());
+        });
+
+        //*************************************************************************//
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        //************************************************************************//
+    }
+       
+
+
+
+    </script>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <div id="box">
+                <div id="left">
+                    <input type="image" src="bulb.png">
+
+                </div>
+
+                <div id="right">
+                    <div id="fortable">
+                        <table id="bulb" border="0" cellspacing="25" style="width:15%">
+                            <tr>
+                                <td align="char">
+                                    <label class="forname">Switch:</label>
+                                </td>
+                                <td valign="middle">
+                                    <label class="switch">
+                                        <input type="checkbox" id="togBtn">
+                                        <div class="slider_round"></div>
+                                    </label>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="color:white;font-family:'Lucida Calligraphy';font-size:25px">Name:</td>
+                                <td style="color:white">
+                                    <label id="node_name" style="font-family:'Lucida Calligraphy';font-size:25px"> PI1 </label>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="color:white;font-family:'Lucida Calligraphy';font-size:25px">UUID:</td>
+                                <td style="color:white">
+                                    <label id="node_uuid" style="font-family:'Lucida Calligraphy';font-size:25px"> XXXXX </label>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function bisket(node) {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                getNode(this);
+            }
+        };
+        xhttp.open("GET", "MeshDetails.xml", true);
+        xhttp.send();
+
+        function getNode(xml) {
+            var txt = "";
+            var xmlDoc = xml.responseXML;
+            var x = xmlDoc.getElementsByTagName("node");
+            document.getElementById("node_name").innerHTML = x[node-1].getElementsByTagName("name")[0].childNodes[0].nodeValue;
+            document.getElementById("node_uuid").innerHTML = x[node-1].getElementsByTagName("node_uuid")[0].childNodes[0].nodeValue;
+        }
+    }
+
+    </script>
+
+</body>
+</html>

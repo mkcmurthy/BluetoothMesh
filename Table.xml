@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mesh>
+  <node>
+    <name>pi1</name>
+    <description>Light1</description>
+    <node_uuid>B0:B4:48:BF:C9:83</node_uuid>
+    <status>0</status>
+    <meshlist>
+      <neighbour>pi2</neighbour>
+      <neighbour>pi3</neighbour>
+    </meshlist>
+  </node>
+  <node>
+    <name>pi2</name>
+    <description>Light2</description>
+    <node_uuid>B0:B4:48:BF:C9:84</node_uuid>
+    <status>0</status>
+    <meshlist>
+      <neighbour>pi1</neighbour>
+    </meshlist>
+  </node>
+  <node>
+    <name>pi3</name>
+    <description>Light3</description>
+    <node_uuid>B0:B4:48:BF:C9:85</node_uuid>
+    <status>0</status>
+    <meshlist>
+      <neighbour>pi1</neighbour>
+    </meshlist>
+  </node>
+</mesh>
