@@ -1,0 +1,18 @@
+Web Server: Raspberry pi 3
+-----------------------------
+1. Install Express JS
+2. replace app.js in local system with the app.js available here
+3. include test.js available here into routes folder in express JS
+4. include all the web pages and images and dependencies into public folder in express JS
+5. install noble npm package for running discovery from web server
+6. Download web_server.js to local system 
+
+BLE nodes: Raspberry pi 3
+-----------------------------
+1. install bleno and noble npm package for discovery and advertisement
+2. Download ble_node.js into these ble nodes
+
+Initialization:
+-----------------------------
+1. Run express JS in web server
+2. Run command '$sudo node ble_node.js' in ble nodes in the mesh network 
